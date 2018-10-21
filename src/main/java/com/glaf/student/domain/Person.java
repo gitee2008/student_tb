@@ -20,7 +20,7 @@ package com.glaf.student.domain;
 
 import java.io.*;
 import java.util.*;
-import javax.persistence.*;
+
 import com.alibaba.fastjson.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -35,368 +35,299 @@ import com.glaf.student.util.*;
  *
  */
 
-@Entity
-@Table(name = "HEALTH_PERSON")
+ 
 public class Person implements Serializable, JSONable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_", length = 50, nullable = false)
+ 
 	protected String id;
 
 	/**
 	 * 租户编号
 	 */
-	@Column(name = "TENANTID_", length = 50)
 	protected String tenantId;
 
 	/**
 	 * 班级编号
 	 */
-	@Column(name = "GRADEID_", length = 50)
 	protected String gradeId;
 
-	@javax.persistence.Transient
 	protected String gradeName;
 
 	/**
 	 * 姓名
 	 */
-	@Column(name = "NAME_", length = 50)
 	protected String name;
 
 	/**
 	 * 名称拼音
 	 */
-	@Column(name = "NAMEPINYIN_", length = 50)
 	protected String namePinyin;
 
 	/**
 	 * 身份证编号
 	 */
-	@Column(name = "IDCARDNO_", length = 20)
 	protected String idCardNo;
 
 	/**
 	 * 学籍号
 	 */
-	@Column(name = "STUDENTCODE_", length = 30)
 	protected String studentCode;
 
 	/**
 	 * 血型
 	 */
-	@Column(name = "BLOODTYPE_", length = 20)
 	protected String bloodType;
 
 	/**
 	 * 国籍
 	 */
-	@Column(name = "NATIONALITY_", length = 200)
 	protected String nationality;
 
 	/**
 	 * 民族
 	 */
-	@Column(name = "NATION_", length = 50)
 	protected String nation;
 
 	/**
 	 * 籍贯
 	 */
-	@Column(name = "BIRTHPLACE_", length = 20)
 	protected String birthPlace;
 
 	/**
 	 * 户口性质
 	 */
-	@Column(name = "NATUREACCOUNT_", length = 20)
 	protected String natureAccount;
 
 	/**
 	 * 户口类型
 	 */
-	@Column(name = "NATURETYPE_", length = 20)
 	protected String natureType;
 
 	/**
 	 * 独生子女
 	 */
-	@Column(name = "ONECHILD_", length = 20)
 	protected String oneChild;
 
 	/**
 	 * 是否残疾
 	 */
-	@Column(name = "DISABILITY_", length = 20)
 	protected String disability;
 
 	/**
 	 * 监护人姓名
 	 */
-	@Column(name = "GUARDIAN_", length = 50)
 	protected String guardian;
 
 	/**
 	 * 监护人证件类型
 	 */
-	@Column(name = "GUARDIANCARDTYPE_", length = 50)
 	protected String guardianCardType;
 
 	/**
 	 * 监护人号码
 	 */
-	@Column(name = "GUARDIANNO_", length = 50)
 	protected String guardianNo;
 
 	/**
 	 * 家长
 	 */
-	@Column(name = "PATRIARCH_", length = 50)
 	protected String patriarch;
 
 	/**
 	 * 电话
 	 */
-	@Column(name = "TELEPHONE_", length = 200)
 	protected String telephone;
 
 	/**
 	 * 省/直辖市
 	 */
-	@Column(name = "PROVINCE_", length = 100)
 	protected String province;
 
 	/**
 	 * 省/直辖市编号
 	 */
-	@Column(name = "PROVINCEID_")
 	protected long provinceId;
 
 	/**
 	 * 市
 	 */
-	@Column(name = "CITY_", length = 100)
 	protected String city;
 
 	/**
 	 * 市编号
 	 */
-	@Column(name = "CITYID_")
 	protected long cityId;
 
 	/**
 	 * 区/县
 	 */
-	@Column(name = "AREA_", length = 100)
 	protected String area;
 
 	/**
 	 * 区/县编号
 	 */
-	@Column(name = "AREAID_")
 	protected long areaId;
 
 	/**
 	 * 镇/街道
 	 */
-	@Column(name = "TOWN_", length = 200)
 	protected String town;
 
 	/**
 	 * 镇/街道编号
 	 */
-	@Column(name = "TOWNID_")
 	protected long townId;
 
 	/**
 	 * 家庭住址
 	 */
-	@Column(name = "HOMEADDRESS_", length = 250)
 	protected String homeAddress;
 
 	/**
 	 * 出生地
 	 */
-	@Column(name = "BIRTHADDRESS_", length = 250)
 	protected String birthAddress;
 
 	/**
 	 * 性别(0代表女生，1代表男生)
 	 */
-	@Column(name = "SEX_", length = 2)
 	protected String sex;
 
 	/**
 	 * 出生日期
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "BIRTHDAY_")
 	protected Date birthday;
 
-	@javax.persistence.Transient
 	protected String birthdayString;
 
 	/**
 	 * 出生年份
 	 */
-	@Column(name = "YEAR_")
 	protected int year;
 
 	/**
 	 * 入园日期
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "JOINDATE_")
 	protected Date joinDate;
 
-	@javax.persistence.Transient
 	protected String joinDateString;
 
 	/**
 	 * 健康状况
 	 */
-	@Column(name = "HEALTHCONDITION_", length = 50)
 	protected String healthCondition;
 
 	/**
 	 * 过敏史（食物、药物、其它过敏史）
 	 */
-	@Column(name = "ALLERGY_", length = 500)
 	protected String allergy;
 
 	/**
 	 * 喂养史
 	 */
-	@Column(name = "FEEDINGHISTORY_", length = 500)
 	protected String feedingHistory;
 
 	/**
 	 * 既往史
 	 */
-	@Column(name = "PREVIOUSHISTORY_", length = 500)
 	protected String previousHistory;
 
 	/**
 	 * 食物过敏史
 	 */
-	@Column(name = "FOODALLERGY_", length = 500)
 	protected String foodAllergy;
 
 	/**
 	 * 药物过敏史
 	 */
-	@Column(name = "MEDICINEALLERGY_", length = 500)
 	protected String medicineAllergy;
 
 	/**
 	 * 入园时身高
 	 */
-	@Column(name = "HEIGHT_")
 	protected double height;
 
 	/**
 	 * 入园时体重
 	 */
-	@Column(name = "WEIGHT_")
 	protected double weight;
 
 	/**
 	 * 父亲
 	 */
-	@Column(name = "FATHER_", length = 50)
 	protected String father;
 
 	/**
 	 * 单位
 	 */
-	@Column(name = "FATHERCOMPANY_", length = 200)
 	protected String fatherCompany;
 
 	/**
 	 * 电话
 	 */
-	@Column(name = "FATHERTELEPHONE_", length = 200)
 	protected String fatherTelephone;
 
 	/**
 	 * 父亲是否监护人
 	 */
-	@Column(name = "FATHERWARDSHIP_", length = 1)
 	protected String fatherWardship;
 
 	/**
 	 * 母亲
 	 */
-	@Column(name = "MOTHER_", length = 50)
 	protected String mother;
 
 	/**
 	 * 单位
 	 */
-	@Column(name = "MOTHERCOMPANY_", length = 200)
 	protected String motherCompany;
 
 	/**
 	 * 电话
 	 */
-	@Column(name = "MOTHERTELEPHONE_", length = 200)
 	protected String motherTelephone;
 
 	/**
 	 * 母亲是否监护人
 	 */
-	@Column(name = "MOTHERWARDSHIP_", length = 1)
 	protected String motherWardship;
 
 	/**
 	 * 备注
 	 */
-	@Column(name = "REMARK_", length = 2000)
 	protected String remark;
 
 	/**
 	 * 创建人
 	 */
-	@Column(name = "CREATEBY_", length = 50)
 	protected String createBy;
 
 	/**
 	 * 创建日期
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATETIME_")
 	protected Date createTime;
 
 	/**
 	 * 修改人
 	 */
-	@Column(name = "UPDATEBY_", length = 50)
 	protected String updateBy;
 
 	/**
 	 * 修改日期
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATETIME_")
 	protected Date updateTime;
 
-	@Column(name = "DELETEFLAG_")
 	protected int deleteFlag;
 
-	@javax.persistence.Transient
 	protected int ageOfTheMoon;
 
-	@javax.persistence.Transient
 	protected int status;
 
-	@javax.persistence.Transient
 	protected String memo;
 
-	@javax.persistence.Transient
 	protected String treat;
 
-	@javax.persistence.Transient
 	protected List<PersonLinkman> linkmans = new ArrayList<PersonLinkman>();
 
 	public Person() {

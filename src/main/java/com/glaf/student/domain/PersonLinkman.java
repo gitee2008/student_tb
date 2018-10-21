@@ -20,7 +20,7 @@ package com.glaf.student.domain;
 
 import java.io.*;
 import java.util.*;
-import javax.persistence.*;
+
 import com.alibaba.fastjson.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -35,93 +35,74 @@ import com.glaf.student.util.*;
  *
  */
 
-@Entity
-@Table(name = "HEALTH_PERSON_LINKMAN")
 public class PersonLinkman implements Serializable, JSONable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_", nullable = false, length = 50)
 	protected String id;
 
 	/**
 	 * 租户编号
 	 */
-	@Column(name = "TENANTID_", length = 50)
 	protected String tenantId;
 
 	/**
 	 * 学生编号
 	 */
-	@Column(name = "PERSONID_", length = 50)
 	protected String personId;
 
 	/**
 	 * 姓名
 	 */
-	@Column(name = "NAME_", length = 100)
 	protected String name;
 
 	/**
 	 * 关系
 	 */
-	@Column(name = "RELATIONSHIP_", length = 50)
 	protected String relationship;
 
 	/**
 	 * 工作单位
 	 */
-	@Column(name = "COMPANY_", length = 200)
 	protected String company;
 
 	/**
 	 * 手机号码
 	 */
-	@Column(name = "MOBILE_", length = 50)
 	protected String mobile;
 
 	/**
 	 * 电子邮件
 	 */
-	@Column(name = "MAIL_", length = 200)
 	protected String mail;
 
 	/**
 	 * 是否监护人
 	 */
-	@Column(name = "WARDSHIP_", length = 1)
 	protected String wardship;
 
 	/**
 	 * 备注
 	 */
-	@Column(name = "REMARK_", length = 2000)
 	protected String remark;
 
 	/**
 	 * 创建人
 	 */
-	@Column(name = "CREATEBY_", length = 50)
 	protected String createBy;
 
 	/**
 	 * 创建日期
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATETIME_")
 	protected Date createTime;
 
 	/**
 	 * 修改人
 	 */
-	@Column(name = "UPDATEBY_", length = 50)
 	protected String updateBy;
 
 	/**
 	 * 修改日期
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATETIME_")
 	protected Date updateTime;
 
 	public PersonLinkman() {

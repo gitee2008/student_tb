@@ -20,7 +20,6 @@ package com.glaf.student.domain;
 
 import java.io.*;
 import java.util.*;
-import javax.persistence.*;
 import com.alibaba.fastjson.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -37,645 +36,525 @@ import com.glaf.student.util.*;
  *
  */
 
-@Entity
-@Table(name = "HEALTH_MEDICAL_EXAMINATION")
 public class MedicalExamination implements Serializable, JSONable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "ID_", nullable = false)
 	protected long id;
 
 	/**
 	 * 检查批次编号
 	 */
-	@Column(name = "BATCHID_")
 	protected long batchId;
 
 	/**
 	 * CheckId
 	 */
-	@Column(name = "CHECKID_", length = 50)
 	protected String checkId;
 
 	/**
 	 * 租户编号
 	 */
-	@Column(name = "TENANTID_", length = 50)
 	protected String tenantId;
 
 	/**
 	 * 班级编号
 	 */
-	@Column(name = "GRADEID_", length = 50)
 	protected String gradeId;
 
-	@javax.persistence.Transient
 	protected String gradeName;
 
 	/**
 	 * 学生编号
 	 */
-	@Column(name = "PERSONID_", length = 50)
 	protected String personId;
 
 	/**
 	 * 姓名
 	 */
-	@Column(name = "NAME_", length = 100)
 	protected String name;
 
 	/**
 	 * 性别(0代表女生，1代表男生)
 	 */
-	@Column(name = "SEX_", length = 2)
 	protected String sex;
 
-	@javax.persistence.Transient
 	protected int age;
 
 	/**
 	 * 身高
 	 */
-	@Column(name = "HEIGHT_")
 	protected double height;
 
 	/**
 	 * 上次体检身高
 	 */
-	@javax.persistence.Transient
 	protected double previousHeight;
 
 	/**
 	 * 身高增长,和前一次体检比较
 	 */
-	@Column(name = "HEIGHTINCREMENT_")
 	protected double heightIncrement;
 
 	/**
 	 * 身高评价
 	 */
-	@Column(name = "HEIGHTEVALUATE_", length = 200)
 	protected String heightEvaluate;
 
-	@javax.persistence.Transient
 	protected String heightEvaluateHtml;
 
 	/**
 	 * 身高等级
 	 */
-	@Column(name = "HEIGHTLEVEL_")
 	protected int heightLevel;
 
 	/**
 	 * 体重
 	 */
-	@Column(name = "WEIGHT_")
 	protected double weight;
 
 	/**
 	 * 上次体检体重
 	 */
-	@javax.persistence.Transient
 	protected double previousWeight;
 
 	/**
 	 * 理论标准体重
 	 */
-	@Column(name = "STDWEIGHT_")
 	protected double stdWeight;
 
 	/**
 	 * 理论标准体重偏差
 	 */
-	@Column(name = "WEIGHTOFFSETPERCENT_")
 	protected double weightOffsetPercent;
 
 	/**
 	 * 体重增长,和前一次体检比较
 	 */
-	@Column(name = "WEIGHTINCREMENT_")
 	protected double weightIncrement;
 
 	/**
 	 * 体重评价
 	 */
-	@Column(name = "WEIGHTEVALUATE_", length = 200)
 	protected String weightEvaluate;
 
-	@javax.persistence.Transient
 	protected String weightEvaluateHtml;
 
 	/**
 	 * 体重等级
 	 */
-	@Column(name = "WEIGHTLEVEL_")
 	protected int weightLevel;
 
 	/**
 	 * 身高别体重等级
 	 */
-	@Column(name = "WEIGHTHEIGHTLEVEL_")
 	protected int weightHeightLevel;
 
 	/**
 	 * 身高体重评价
 	 */
-	@Column(name = "WEIGHTHEIGHTEVALUATE_", length = 200)
 	protected String weightHeightEvaluate;
 
-	@javax.persistence.Transient
 	protected String weightHeightEvaluateHtml;
 
 	/**
 	 * 身高别体重
 	 */
-	@Column(name = "WEIGHTHEIGHTPERCENT_")
 	protected double weightHeightPercent;
 
 	/**
 	 * BMI
 	 */
-	@Column(name = "BMI_")
 	protected double bmi;
 
 	/**
 	 * 体重指数
 	 */
-	@Column(name = "BMIINDEX_")
 	protected double bmiIndex;
 
 	/**
 	 * 综合评价
 	 */
-	@Column(name = "BMIEVALUATE_", length = 200)
 	protected String bmiEvaluate;
 
-	@javax.persistence.Transient
 	protected String bmiEvaluateHtml;
 
 	/**
 	 * 肥胖指数
 	 */
-	@Column(name = "OBESITYINDEX_")
 	protected double obesityIndex;
 
 	/**
 	 * 过敏史
 	 */
-	@Column(name = "ALLERGY_", length = 200)
 	protected String allergy;
 
-	@javax.persistence.Transient
 	protected String eye;
 
 	/**
 	 * 左眼
 	 */
-	@Column(name = "EYELEFT_", length = 200)
 	protected String eyeLeft;
 
 	/**
 	 * 左眼Remark
 	 */
-	@Column(name = "EYELEFTREMARK_", length = 200)
 	protected String eyeLeftRemark;
 
 	/**
 	 * 右眼
 	 */
-	@Column(name = "EYERIGHT_", length = 200)
 	protected String eyeRight;
 
 	/**
 	 * 右眼Remark
 	 */
-	@Column(name = "EYERIGHTREMARK_", length = 200)
 	protected String eyeRightRemark;
 
 	/**
 	 * 左视力
 	 */
-	@Column(name = "EYESIGHTLEFT_")
 	protected double eyesightLeft;
 
 	/**
 	 * 右视力
 	 */
-	@Column(name = "EYESIGHTRIGHT_")
 	protected double eyesightRight;
 
-	@javax.persistence.Transient
 	protected boolean eyesightDysfunction;
 
-	@javax.persistence.Transient
 	protected String ear;
 
 	/**
 	 * 左耳
 	 */
-	@Column(name = "EARLEFT_", length = 200)
 	protected String earLeft;
 
 	/**
 	 * 左耳Remark
 	 */
-	@Column(name = "EARLEFTREMARK_", length = 200)
 	protected String earLeftRemark;
 
 	/**
 	 * 右耳
 	 */
-	@Column(name = "EARRIGHT_", length = 200)
 	protected String earRight;
 
 	/**
 	 * 右耳Remark
 	 */
-	@Column(name = "EARRIGHTREMARK_", length = 200)
 	protected String earRightRemark;
 
 	/**
 	 * 牙齿数
 	 */
-	@Column(name = "TOOTH_")
 	protected int tooth;
 
 	/**
 	 * 龋齿数
 	 */
-	@Column(name = "SAPRODONTIA_")
 	protected int saprodontia;
 
 	/**
 	 * 头颅
 	 */
-	@Column(name = "HEAD_", length = 200)
 	protected String head;
 
 	/**
 	 * 头颅Remark
 	 */
-	@Column(name = "HEADREMARK_", length = 200)
 	protected String headRemark;
 
 	/**
 	 * 胸廓
 	 */
-	@Column(name = "THORAX_", length = 200)
 	protected String thorax;
 
 	/**
 	 * 胸廓Remark
 	 */
-	@Column(name = "THORAXREMARK_", length = 200)
 	protected String thoraxRemark;
 
 	/**
 	 * 脊柱四肢
 	 */
-	@Column(name = "SPINE_", length = 200)
 	protected String spine;
 
 	/**
 	 * 脊柱四肢Remark
 	 */
-	@Column(name = "SPINEREMARK_", length = 200)
 	protected String spineRemark;
 
 	/**
 	 * 咽部
 	 */
-	@Column(name = "PHARYNGEAL_", length = 200)
 	protected String pharyngeal;
 
 	/**
 	 * 咽部Remark
 	 */
-	@Column(name = "PHARYNGEALREMARK_", length = 200)
 	protected String pharyngealRemark;
 
 	/**
 	 * 心肺
 	 */
-	@Column(name = "CARDIOPULMONARY_", length = 200)
 	protected String cardiopulmonary;
 
 	/**
 	 * 心肺Remark
 	 */
-	@Column(name = "CARDIOPULMONARYREMARK_", length = 200)
 	protected String cardiopulmonaryRemark;
 
 	/**
 	 * 肝脾
 	 */
-	@Column(name = "HEPATOLIENAL_", length = 200)
 	protected String hepatolienal;
 
 	/**
 	 * 肝脾Remark
 	 */
-	@Column(name = "HEPATOLIENALREMARK_", length = 200)
 	protected String hepatolienalRemark;
 
 	/**
 	 * 外生殖器
 	 */
-	@Column(name = "PUDENDUM_", length = 200)
 	protected String pudendum;
 
 	/**
 	 * 外生殖器Remark
 	 */
-	@Column(name = "PUDENDUMREMARK_", length = 200)
 	protected String pudendumRemark;
 
 	/**
 	 * 皮肤
 	 */
-	@Column(name = "SKIN_", length = 200)
 	protected String skin;
 
 	/**
 	 * 皮肤Remark
 	 */
-	@Column(name = "SKINREMARK_", length = 200)
 	protected String skinRemark;
 
 	/**
 	 * 内科疾病
 	 */
-	@javax.persistence.Transient
 	protected String internalDisease;
 
 	/**
 	 * 外科疾病
 	 */
-	@javax.persistence.Transient
 	protected String surgicalDisease;
 
 	/**
 	 * 血红蛋白
 	 */
-	@Column(name = "HEMOGLOBIN_", length = 200)
 	protected String hemoglobin;
 
-	@javax.persistence.Transient
 	protected String hemoglobinHtml;
 
 	/**
 	 * 血红蛋白Hb
 	 */
-	@Column(name = "HEMOGLOBIN_VALUE_")
 	protected double hemoglobinValue;
 
-	@javax.persistence.Transient
 	protected int anemiaLevel;
 
 	/**
 	 * 丙氨酸氨基转移酶
 	 */
-	@Column(name = "ALT_", length = 200)
 	protected String alt;
 
-	@javax.persistence.Transient
 	protected String altHtml;
 
 	/**
 	 * 丙氨酸氨基转移酶ALT
 	 */
-	@Column(name = "ALT_VALUE_")
 	protected double altValue;
 
 	/**
 	 * 乙肝表面抗体
 	 */
-	@Column(name = "HBSAB_", length = 1)
 	protected String hbsab;
 
 	/**
 	 * 乙肝表面抗体
 	 */
-	@Column(name = "HBSAB_VALUE_")
 	protected double hbsabValue;
 
 	/**
 	 * 肝功能
 	 */
-	@Column(name = "SGPT_", length = 1)
 	protected String sgpt;
 
 	/**
 	 * 肝炎病毒
 	 */
-	@Column(name = "HVAIGM_", length = 1)
 	protected String hvaigm;
 
-	@javax.persistence.Transient
 	protected String hvaigmText;
 
 	/**
 	 * 淋巴结
 	 */
-	@Column(name = "LYMPHOID_", length = 200)
 	protected String lymphoid;
 
 	/**
 	 * 淋巴结Remark
 	 */
-	@Column(name = "LYMPHOIDREMARK_", length = 200)
 	protected String lymphoidRemark;
 
 	/**
 	 * 前囟
 	 */
-	@Column(name = "BREGMA_", length = 200)
 	protected String bregma;
 
 	/**
 	 * 前囟Remark
 	 */
-	@Column(name = "BREGMAREMARK_", length = 200)
 	protected String bregmaRemark;
 
 	/**
 	 * 口腔
 	 */
-	@Column(name = "ORALOGY_", length = 200)
 	protected String oralogy;
 
 	/**
 	 * 口腔Remark
 	 */
-	@Column(name = "ORALOGYREMARK_", length = 200)
 	protected String oralogyRemark;
 
 	/**
 	 * 扁桃体
 	 */
-	@Column(name = "TONSIL_", length = 200)
 	protected String tonsil;
+
 	/**
 	 * 扁桃体Remark
 	 */
-	@Column(name = "TONSILREMARK_", length = 200)
 	protected String tonsilRemark;
 
 	/**
 	 * 骨骼
 	 */
-	@Column(name = "BONE_", length = 200)
 	protected String bone;
 
 	/**
 	 * 骨骼Remark
 	 */
-	@Column(name = "BONEREMARK_", length = 200)
 	protected String boneRemark;
 
 	/**
 	 * 先天缺陷
 	 */
-	@Column(name = "BIRTHDEFECT_", length = 200)
 	protected String birthDefect;
 
 	/**
 	 * 既往史
 	 */
-	@Column(name = "PREVIOUSHISTORY_", length = 500)
 	protected String previousHistory;
 
 	/**
 	 * 健康评价
 	 */
-	@Column(name = "HEALTHEVALUATE_", length = 500)
 	protected String healthEvaluate;
 
 	/**
 	 * 类型
 	 */
-	@Column(name = "TYPE_", length = 50)
 	protected String type;
 
-	@javax.persistence.Transient
 	protected Date birthday;
 
-	@javax.persistence.Transient
 	protected String birthdayString;
 
 	/**
 	 * 体检时间
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CHECKDATE_")
 	protected Date checkDate;
 
-	@javax.persistence.Transient
 	protected String checkDateString;
 
 	/**
 	 * 体检医生
 	 */
-	@Column(name = "CHECKDOCTOR_", length = 50)
 	protected String checkDoctor;
 
 	/**
 	 * 体检医生ID
 	 */
-	@Column(name = "CHECKDOCTORID_", length = 50)
 	protected String checkDoctorId;
 
 	/**
 	 * 体检结果
 	 */
-	@Column(name = "CHECKRESULT_", length = 500)
 	protected String checkResult;
 
 	/**
 	 * 体检机构
 	 */
-	@Column(name = "CHECKORGANIZATION_", length = 200)
 	protected String checkOrganization;
 
 	/**
 	 * 体检机构ID
 	 */
-	@Column(name = "CHECKORGANIZATIONID_")
 	protected long checkOrganizationId;
 
 	/**
 	 * 医生建议
 	 */
-	@Column(name = "DOCTORSUGGEST_", length = 50)
 	protected String doctorSuggest;
 
 	/**
 	 * 年
 	 */
-	@Column(name = "YEAR_")
 	protected int year;
 
 	/**
 	 * 月
 	 */
-	@Column(name = "MONTH_")
 	protected int month;
 
 	/**
 	 * 体检时月龄
 	 */
-	@Column(name = "AGEOFTHEMOON_")
 	protected int ageOfTheMoon;
 
-	@javax.persistence.Transient
 	protected int checkIntervalMoon;
 
 	/**
 	 * 备注
 	 */
-	@Column(name = "REMARK_", length = 500)
 	protected String remark;
 
 	/**
 	 * 内科疾病
 	 */
-	@javax.persistence.Transient
 	protected int medicineFlag;
 
 	/**
 	 * 外科疾病
 	 */
-	@javax.persistence.Transient
 	protected int surgeryFlag;
 
 	/**
 	 * 确认人
 	 */
-	@Column(name = "CONFIRMBY_", length = 50)
 	protected String confirmBy;
 
 	/**
 	 * 确认时间
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CONFIRMTIME_")
 	protected Date confirmTime;
 
-	@javax.persistence.Transient
 	protected int sortNo;
 
 	/**
 	 * 创建人
 	 */
-	@Column(name = "CREATEBY_", length = 50)
 	protected String createBy;
 
 	/**
 	 * 创建日期
 	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATETIME_")
 	protected Date createTime;
 
 	public MedicalExamination() {
