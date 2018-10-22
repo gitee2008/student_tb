@@ -186,8 +186,7 @@ public class SysApplicationServiceImpl implements SysApplicationService {
 	/**
 	 * 按编码查找对象
 	 * 
-	 * @param code
-	 *            String
+	 * @param code String
 	 * @return SysApplication
 	 */
 	public SysApplication findByCode(String code) {
@@ -319,7 +318,11 @@ public class SysApplicationServiceImpl implements SysApplicationService {
 			treeIdLike = parent.getTreeId() + "%";
 		}
 		SysApplicationQuery query = new SysApplicationQuery();
-		query.treeIdLike(treeIdLike);
+		if (treeIdLike != null) {
+			query.treeIdLike(treeIdLike);
+		} else {
+			query.treeIdLike(parentId + "%");
+		}
 		query.setOrderBy(" E.TREEID asc, E.LOCKED asc, E.SORTNO asc");
 		List<SysApplication> apps = this.list(query);
 		List<SysApplication> list = new ArrayList<SysApplication>();
