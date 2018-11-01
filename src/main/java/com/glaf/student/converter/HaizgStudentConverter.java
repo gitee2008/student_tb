@@ -64,7 +64,7 @@ public class HaizgStudentConverter {
 				continue;
 			}
 			Person person = new Person();
-			//String year = null;
+			// String year = null;
 			HSSFCell cell = null;
 			String cellValue = null;
 			String rel = null;
@@ -82,12 +82,12 @@ public class HaizgStudentConverter {
 					cellValue = cellValue.trim();
 					switch (colIndex) {
 					case 0:
-						//year = cellValue;
+						// year = cellValue;
 						break;
 					case 1:// 班级
-						//cellValue = StringTools.replace(cellValue, "小", "");
-						//cellValue = StringTools.replace(cellValue, "中", "");
-						//cellValue = StringTools.replace(cellValue, "大", "");
+							// cellValue = StringTools.replace(cellValue, "小", "");
+							// cellValue = StringTools.replace(cellValue, "中", "");
+							// cellValue = StringTools.replace(cellValue, "大", "");
 						person.setGradeName(cellValue);
 						break;
 					case 4:// 姓名
@@ -137,6 +137,7 @@ public class HaizgStudentConverter {
 						rel = cellValue;
 						break;
 					case 22:// 家庭成员1手机号码
+						cellValue = ExcelUtils.getString(cell, 0);
 						tel = cellValue;
 						break;
 					case 23:// 家庭成员1单位
@@ -162,6 +163,7 @@ public class HaizgStudentConverter {
 						rel = cellValue;
 						break;
 					case 29:// 家庭成员1手机号码
+						cellValue = ExcelUtils.getString(cell, 0);
 						tel = cellValue;
 						break;
 					case 30:// 家庭成员1单位
